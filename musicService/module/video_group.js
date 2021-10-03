@@ -1,21 +1,17 @@
-// 视频标签/分类下的视频
+// 视频链接
 
 module.exports = (query, request) => {
   const data = {
     groupId: query.id,
     offset: query.offset || 0,
-    need_preview_url: 'true',
-    total: true,
+    needUrl: true,
+    resolution: query.res || 1080
   }
   return request(
-    'POST',
-    `https://music.163.com/api/videotimeline/videogroup/otherclient/get`,
-    data,
-    {
+    'POST', `https://music.163.com/weapi/videotimeline/videogroup/get`, data, {
       crypto: 'weapi',
       cookie: query.cookie,
-      proxy: query.proxy,
-      realIP: query.realIP,
-    },
+      proxy: query.proxy
+    }
   )
 }

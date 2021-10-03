@@ -1,17 +1,11 @@
 // 每日推荐歌曲
 
 module.exports = (query, request) => {
-  query.cookie.os = 'ios'
-  const data = {}
+  const data = {
+    total: true
+  }
   return request(
-    'POST',
-    `https://music.163.com/api/v3/discovery/recommend/songs`,
-    data,
-    {
-      crypto: 'weapi',
-      cookie: query.cookie,
-      proxy: query.proxy,
-      realIP: query.realIP,
-    },
+    'POST', `https://music.163.com/weapi/v1/discovery/recommend/songs`, data,
+    {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
   )
 }

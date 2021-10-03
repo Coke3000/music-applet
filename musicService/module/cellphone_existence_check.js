@@ -3,18 +3,17 @@
 module.exports = (query, request) => {
   const data = {
     cellphone: query.phone,
-    countrycode: query.countrycode,
-  }
+    countrycode: query.countrycode
+  };
   return request(
     'POST',
-    `https://music.163.com/eapi/cellphone/existence/check`,
+    `http://music.163.com/eapi/cellphone/existence/check`,
     data,
     {
       crypto: 'eapi',
       cookie: query.cookie,
       proxy: query.proxy,
-      url: '/api/cellphone/existence/check',
-      realIP: query.realIP,
-    },
-  )
-}
+      url: '/api/cellphone/existence/check'
+    }
+  );
+};

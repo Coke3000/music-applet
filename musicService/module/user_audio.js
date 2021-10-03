@@ -2,17 +2,10 @@
 
 module.exports = (query, request) => {
   const data = {
-    userId: query.uid,
+    userId: query.uid
   }
   return request(
-    'POST',
-    `https://music.163.com/weapi/djradio/get/byuser`,
-    data,
-    {
-      crypto: 'weapi',
-      cookie: query.cookie,
-      proxy: query.proxy,
-      realIP: query.realIP,
-    },
+    'POST', `https://music.163.com/weapi/djradio/get/byuser`, data,
+    {crypto: 'weapi', cookie: query.cookie, proxy: query.proxy}
   )
 }

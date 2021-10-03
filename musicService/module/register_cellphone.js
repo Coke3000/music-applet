@@ -7,13 +7,12 @@ module.exports = (query, request) => {
     captcha: query.captcha,
     phone: query.phone,
     password: crypto.createHash('md5').update(query.password).digest('hex'),
-    nickname: query.nickname,
-    countrycode: query.countrycode || '86',
+    nickname: query.nickname
   }
-  return request('POST', `https://music.163.com/api/register/cellphone`, data, {
-    crypto: 'weapi',
-    cookie: query.cookie,
-    proxy: query.proxy,
-    realIP: query.realIP,
-  })
+  return request(
+    'POST',
+    `https://music.163.com/weapi/register/cellphone`,
+    data,
+    { crypto: 'weapi', cookie: query.cookie, proxy: query.proxy }
+  )
 }

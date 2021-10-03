@@ -1,26 +1,21 @@
-module.exports = async (query, request) => {
-  const data = {}
-  let result = await request(
-    'POST',
-    `https://music.163.com/weapi/w/nuser/account/get`,
-    data,
-    {
-      crypto: 'weapi',
-      cookie: query.cookie,
-      proxy: query.proxy,
-      realIP: query.realIP,
-    },
+// 登录状态
+
+module.exports = (query, request) => {
+  return request(
+    'GET', `https://music.163.com`, {},
+    {cookie: query.cookie, proxy: query.proxy}
   )
-  if (result.body.code === 200) {
-    result = {
-      status: 200,
-      body: {
-        data: {
-          ...result.body,
-        },
-      },
-      cookie: result.cookie,
-    }
-  }
-  return result
+    .then(response => {
+      try{
+        let profile = eval(`(${/GUser\s*=\s*([^;]+);/.exec(response.body)[1]})`)
+        let bindings = eval(`(${/GBinds\s*=\s*([^;]+);/.exec(response.body)[1]})`)
+        response.body = {code: 200, profile: profile, bindings: bindings}
+        return response
+      }
+      catch(err){
+        response.status = 301
+        response.body = {code: 301}
+        return Promise.reject(response)
+      }
+    })
 }

@@ -1,10 +1,12 @@
 // pages/video/video.js
+import request from "../../utils/request"
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        videoGroupList:[]
 
     },
 
@@ -12,7 +14,16 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        this.getGroupListData()
 
+    },
+   async getGroupListData(){
+        let result=await  request("/video/group/list")
+        let videoGroupList=result.data.splice(0,14)
+        console.log(result.data)
+        this.setData({
+            videoGroupList
+        })
     },
 
     /**

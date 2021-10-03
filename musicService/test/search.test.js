@@ -1,25 +1,22 @@
 const assert = require('assert')
-const axios = require('axios')
+const request = require('request')
 const host = global.host || 'http://localhost:3000'
 
 describe('测试搜索是否正常', () => {
-  it('获取到的数据的 name 应该和搜索关键词一致', (done) => {
+  it('获取到的数据的 name 应该和搜索关键词一致', done => {
     const qs = {
       keywords: '海阔天空',
-      type: 1,
+      type: 1
     }
-    axios
-      .get(`${host}/search`, {
-        params: qs,
-      })
-      .then(({ status, data }) => {
-        if (status == 200) {
-          assert(data.result.songs[0].name === '海阔天空')
-        }
+    request.get({url: `${host}/search`, qs: qs}, (err, res, body) => {
+      if (!err && res.statusCode == 200) {
+        body = JSON.parse(body)
+        assert(body.result.songs[0].name === '海阔天空')
         done()
-      })
-      .catch((err) => {
+      }
+      else{
         done(err)
-      })
+      }
+    })
   })
 })
