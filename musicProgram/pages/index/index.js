@@ -8,7 +8,7 @@ Page({
     data: {
         banner:[],
         recommendMusic:[],
-        hotArtists:[]
+        toplist:[]
     },
 
     /**
@@ -28,26 +28,27 @@ Page({
             recommendMusic:recommendResult.result
         })
         //获取歌手榜单
-        let i=1;
-        let toplist=[
-            {title:"华语",hotArt:[]},
-            {title:"欧美",hotArt:[]},
-            {title:"韩国",hotArt:[]},
-            {title:"日本",hotArt:[]},
-        ]
+        let i=0;
+        let resultArr=[]
         while(i<5){
-            let artists=await request("/toplist/artist",{type:i});
-            toplist[i-1].hotArt=artists.list.artists.slice(0,3);
-            i++;
-            // console.log(artists.list.artists.slice(0,3))
+            let topListResult=await request("/top/list",{idx:i++});
+            let topListItem={name:topListResult.playlist.name,track:topListResult.playlist.tracks.splice(0,3)}
+            resultArr.push(topListItem)
         }
         this.setData({
-            hotArtists:toplist
+            toplist:resultArr
         })
         
 
     },
 
+
+    //跳转到每日推荐跳转
+    goToRecommend(){
+        wx.navigateTo({
+          url: '/pages/recommendSong/recommendSong',
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

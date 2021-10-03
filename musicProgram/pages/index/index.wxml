@@ -9,7 +9,7 @@
 <!-- 五个图标导航区域 -->
 <view>
     <view class="navContainer">
-       <view class="navItem">
+       <view class="navItem" bindtap="goToRecommend">
        <text class=" iconfont icon-tuijian1"></text>
        <text>每日推荐</text>
        </view>
@@ -43,14 +43,14 @@
 </scroll-view>
 
 <!-- 排行榜区域 -->
-<nav-header title="排行榜" nav="最HOT歌手"></nav-header>
+<nav-header title="排行榜" nav="热歌风向标"></nav-header>
 <swiper class="swiper" next-margin="40rpx" previous-margin="10rpx" circular>
-    <swiper-item class="swiper-item" wx:for="{{hotArtists}}"wx:key="title">
-        <text class="title">{{item.title}}</text>
-        <view class="info" wx:for="{{item.hotArt}}" wx:key="id" wx:for-item="item2" wx:for-index="index2">
-        <image src="{{item2.picUrl}}"></image>
+    <swiper-item class="swiper-item" wx:for="{{toplist}}"wx:key="name">
+        <text class="title">{{item.name}}</text>
+        <view class="info" wx:for="{{item.track}}" wx:key="id" wx:for-item="item2" wx:for-index="index2">
+        <image src="{{item2.al.picUrl}}"></image>
         <text>{{index2+1}}</text>
-        <text>{{item2.name}}</text>
+        <text>{{item2.al.name}}</text>
         </view>
     </swiper-item>
 </swiper>

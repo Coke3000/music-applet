@@ -23,7 +23,7 @@
     bindrefresherrefresh="handleRefresher"
     refresher-triggered="{{isTriggered}}"
   >
-    <view class="videoItem" wx:for="{{videoList}}" wx:key="id">
+    <view class="videoItem" wx:for="{{video}}" wx:key="id">
       <video 
         src="{{item.data.urlInfo.url}}"
         bindplay="handlePlay"
@@ -33,8 +33,6 @@
         wx:if="{{videoId === item.data.vid}}"
         autoplay="true"
         object-fit="fill"
-        bindtimeupdate="handleTimeUpdate"
-        bindended="handleEnded"
       ></video>
 
       <!-- 优化image图片代替video标签 -->
@@ -42,7 +40,6 @@
 
       <!-- 底部 -->
       <view class="content">{{item.data.title}}</view>
-      
       <view class="footer">
         <image class="avatar" src="{{item.data.creator.avatarUrl}}"></image>
         <text class="nickName">{{item.data.creator.nickname}}</text>
@@ -52,11 +49,11 @@
             <text class="count">{{item.data.praisedCount}}</text>
           </text>
           <text class="item">
-            <text class="iconfont icon-comment"></text>
+            <text class="iconfont icon-pinglun"></text>
             <text class="count">{{item.data.commentCount}}</text>
           </text>
           <button open-type="share" class="item btn">
-            <text class="iconfont icon-xuanxiang"></text>
+            <text class="iconfont icon-diandiandianshu"></text>
           </button>
         </view>
       </view>

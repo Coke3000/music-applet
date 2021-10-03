@@ -49,7 +49,7 @@ Page({
     //向服务器发送数据
       let phone=this.data.phone
       let password=this.data.password
-      let loginResult=await request("/login/cellphone",{phone,password})
+      let loginResult=await request("/login/cellphone",{phone,password,isLogin:true})
     //   console.log(loginResult)
       //判读是否登录成功
       if(loginResult.code===200){
