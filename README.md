@@ -3,6 +3,8 @@
 
 #### 启动服务器：
 
+- 进入musicService文件夹
+
 - ````
   npm install
   ````
