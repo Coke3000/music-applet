@@ -1,13 +1,13 @@
 {
     "pages": [
+        "pages/search/search",
+        "pages/index/index",
         "pages/recommendSong/recommendSong",
         "pages/songDetail/songDetail",
-       
         "pages/video/video",
         "pages/personal/personal",
-        "pages/index/index",
         "pages/login/login"
-        
+       
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -38,6 +38,9 @@
             }
         ]
     },
+    "requiredBackgroundModes": [
+        "audio"
+    ],
     "style": "v2",
     "sitemapLocation": "sitemap.json"
 }

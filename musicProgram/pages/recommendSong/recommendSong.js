@@ -1,5 +1,6 @@
 // pages/recommendSong/recommendSong.js
 import request from "../../utils/request"
+import PubSub from "pubsub-js"
 Page({
 
     /**
@@ -9,7 +10,8 @@ Page({
         year:"",
         month:"",
         day:"",
-        recommendList:[]
+        recommendList:[],
+        index:0//存放当前点击音乐下标
 
     },
 
@@ -37,6 +39,26 @@ Page({
         }
         //获取推荐数据
         this.getRecommendData();
+        //订阅来自songDetail页面发布的消息
+    PubSub.subscribe('switchMusic',(msg,type) => {
+        let {recommendList,index} = this.data;
+        if(type === 'pre'){//上一首
+          (index === 0) && (index = recommendList.length);
+          index -= 1;
+        }else{//下一首
+          (index === recommendList.length - 1) && (index = -1);
+          index += 1;
+        }
+  
+        //更新下标
+        this.setData({
+          index: index
+        })
+  
+        let musicInfo = recommendList[index];
+        //将音乐id回传给songDetail页面
+        PubSub.publish('musicInfo',musicInfo);
+    })
 
     },
 
@@ -50,6 +72,10 @@ Page({
     //点击跳转到歌曲播放页
     toSongDetail(event){
         let song=event.currentTarget.dataset.song
+        let index=event.currentTarget.dataset.index
+        this.setData({
+            index
+        })
         wx.navigateTo({
           url: '/pages/songDetail/songDetail',
           success:(res)=>{
