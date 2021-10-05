@@ -68,6 +68,21 @@ Page({
         this.debounce(this.getSearchList,500)
         
     },
+    //删除搜索记录
+    handleDelete(){
+        wx.showModal({
+           content:"确定删除历史搜索记录吗？",
+         success:(res)=>{
+             if(res.confirm){
+                 wx.removeStorageSync('historyList')
+                 this.setData({
+                     historyList:[]
+                 })
+             }
+         }
+           
+        })
+    },
 
     //防抖函数
     debounce(fn,delay){

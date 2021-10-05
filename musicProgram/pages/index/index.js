@@ -49,6 +49,13 @@ Page({
           url: '/pages/recommendSong/recommendSong',
         })
     },
+
+    //跳转到搜索界面
+    goToSearch(){
+        wx.navigateTo({
+          url: '/pages/search/search',
+        })
+    },
     /**
      * 生命周期函数--监听页面初次渲染完成
      */

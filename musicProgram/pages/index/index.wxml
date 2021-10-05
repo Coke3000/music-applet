@@ -1,4 +1,9 @@
 <!--pages/index/index.wxml-->
+<!-- 搜索界面 -->
+<view class="search" bindtap="goToSearch">
+    <text class="searchIcon iconfont icon-search"></text>
+    <input class="inputContent" type="text" placeholder="搜索歌曲"/>
+</view>
 <!-- 轮播图 -->
 <swiper class="banner" indicator-dots indicator-color="ivory" indicator-active-color="#d43c33" autoplay  circular>
     <swiper-item wx:for="{{banner}}" wx:key="bannerId">
